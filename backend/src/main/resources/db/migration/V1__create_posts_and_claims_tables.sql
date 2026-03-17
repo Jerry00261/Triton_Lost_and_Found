@@ -3,7 +3,7 @@ CREATE TABLE posts (
     title VARCHAR(120) NOT NULL,
     description TEXT NOT NULL,
     location VARCHAR(120),
-    post_type VARCHAR(20) NOT NULL CHECK (post_type IN ('LOST', 'FOUND')),
+    post_type VARCHAR(10) NOT NULL CHECK (post_type IN ('LOST', 'FOUND')),
     status VARCHAR(20) NOT NULL DEFAULT 'OPEN',
     private_identifying_details TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()

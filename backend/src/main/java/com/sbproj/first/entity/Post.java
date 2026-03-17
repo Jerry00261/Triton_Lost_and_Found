@@ -17,10 +17,10 @@ public class Post {
     private String description;
 
     @Column(length = 120)
-    private String location
+    private String location;
 
-    @Column(name = "post_type", nullable = false, length = 20) //! Originally was 10 but changed to 20, ask chat if okay
-    private String postType; //? Why is the name not matching the name in the table
+    @Column(name = "post_type", nullable = false, length = 10) 
+    private String postType; 
 
     @Column(nullable = false, length = 20)
     private String status;
@@ -47,5 +47,67 @@ public class Post {
         this.createdAt = createdAt;
     }
 
-    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPostType() {
+        return postType;
+    }
+
+    public void setPostType(String postType) {
+        this.postType = postType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPrivateIdentifyingDetails() {
+        return privateIdentifyingDetails;
+    }
+
+    public void setPrivateIdentifyingDetails(String privateIdentifyingDetails) {
+        this.privateIdentifyingDetails = privateIdentifyingDetails;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
