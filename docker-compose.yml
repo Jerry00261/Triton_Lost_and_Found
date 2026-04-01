@@ -3,13 +3,26 @@ services:
     image: postgres:16
     container_name: sbproj-db
     environment:
-      POSTGRES_DB: sbproj
-      POSTGRES_USER: sbproj_app
-      POSTGRES_PASSWORD: sbproj_password
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:5432"
     volumes:
       - sbproj_pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    container_name: sbproj-backend
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${BACKEND_PORT}:8080"
+    depends_on:
+      - db
 
 volumes:
   sbproj_pgdata:
