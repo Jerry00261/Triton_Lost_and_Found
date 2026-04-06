@@ -1,17 +1,15 @@
 package com.sbproj.first.controller;
 
+import com.sbproj.first.dto.CreatePostRequest;
 import com.sbproj.first.entity.Post;
 import com.sbproj.first.repository.PostRepository;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("/api/posts")
@@ -31,23 +29,22 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<Post> getPostById(@PathVariable Long id) {
         Optional<Post> post = postRepository.findById(id);
-        if(post.isPresent()) {
-            return ResponseEntity.ok(post.get());
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
+        return post.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
-        if(post.getStatus() == null || post.getStatus().isBlank()) {
-            post.setStatus("OPEN");
-        }
-        if(post.getCreatedAt() == null) {
-            post.setCreatedAt(LocalDateTime.now());
-        }
+    public ResponseEntity<Post> createPost(@Valid @RequestBody CreatePostRequest request) {
+        Post post = new Post();
+        post.setTitle(request.getTitle());
+        post.setDescription(request.getDescription());
+        post.setLocation(request.getLocation());
+        post.setPostType(request.getPostType().toUpperCase());
+        post.setPrivateIdentifyingDetails(request.getPrivateIdentifyingDetails());
+        post.setStatus("OPEN");
+        post.setCreatedAt(LocalDateTime.now());
+
         Post savedPost = postRepository.save(post);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedPost);
+        return ResponseEntity.ok(savedPost);
     }
 }
