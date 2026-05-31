@@ -16,7 +16,7 @@ services:
       context: ./backend
     container_name: sbproj-backend
     environment:
-      DB_URL: jdbc:postgresql://db:5432/${DB_NAME}
+      DB_URL: ${DB_URL}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
     ports:
