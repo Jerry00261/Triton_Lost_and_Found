@@ -51,7 +51,7 @@ public class ClaimController {
     // ResponseEntity represents entire HTTP response including status code, headers, and body.
     // <?> Java generic wildcard meaning "any type" 
     // Overall, ResponseEntity<?> can hold a response with any type of body (e.g. Claim, List, String, etc)
-    public ResponseEntity<?> createClaim(@PathVariable Long postId, @RequestBody Claim claimRequest) {
+    public ResponseEntity<?> createClaim(@PathVariable Long postId, @RequestBody CreateClaimRequest claimRequest) {
 
         // Look up the post by its ID - returns an Optional (may or may not exist)
         // Can either contain a Post object (<Post>) or be empty (Optional)
