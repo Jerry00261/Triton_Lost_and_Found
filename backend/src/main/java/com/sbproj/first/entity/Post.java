@@ -25,9 +25,6 @@ public class Post {
     @Column(nullable = false, length = 20)
     private String status;
 
-    @Column(name = "private_identifying_details", columnDefinition = "TEXT")
-    private String privateIdentifyingDetails;
-
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
@@ -43,7 +40,6 @@ public class Post {
         this.location = location;
         this.postType = postType;
         this.status = status;
-        this.privateIdentifyingDetails = privateIdentifyingDetails;
         this.createdAt = createdAt;
     }
 
@@ -95,13 +91,6 @@ public class Post {
         this.status = status;
     }
 
-    public String getPrivateIdentifyingDetails() {
-        return privateIdentifyingDetails;
-    }
-
-    public void setPrivateIdentifyingDetails(String privateIdentifyingDetails) {
-        this.privateIdentifyingDetails = privateIdentifyingDetails;
-    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

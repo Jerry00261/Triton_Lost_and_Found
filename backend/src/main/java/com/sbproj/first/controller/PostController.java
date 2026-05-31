@@ -11,18 +11,28 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+// Marks this class as a REST controller - Spring will handle HTTP requests here
+// and automatically serialize return values to JSON.
 @RestController
+
+// All endpoints in this controller are prefixed with /api/posts
 @RequestMapping("/api/posts")
 public class PostController {
 
+    // Repository for performing databse operations on Post records
     private final PostRepository postRepository;
 
+    // Contructor injection - Spring automatically provides this dependency at startup
     public PostController(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
+    // Handles GET /api/posts
+    // Returns every post in the databse as a JSON array
     @GetMapping
     public List<Post> getAllPosts() {
+
+        // findAll() is provided by JpaRepository - no custom query needed
         return postRepository.findAll();
     }
 
@@ -40,7 +50,6 @@ public class PostController {
         post.setDescription(request.getDescription());
         post.setLocation(request.getLocation());
         post.setPostType(request.getPostType().toUpperCase());
-        post.setPrivateIdentifyingDetails(request.getPrivateIdentifyingDetails());
         post.setStatus("OPEN");
         post.setCreatedAt(LocalDateTime.now());
 

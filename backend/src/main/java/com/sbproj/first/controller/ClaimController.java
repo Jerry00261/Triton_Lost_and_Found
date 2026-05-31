@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-// Marks this class as a REST controlle, meaning Spring will handle
+// Marks this class as a REST controller, meaning Spring will handle
 // HTTP requests and responses here and automatically serialize return 
 // values to JSON.
 @RestController
@@ -31,7 +31,7 @@ public class ClaimController {
     // Repository for performing databse operations on Claim records
     private final ClaimRepository claimRepository;
 
-    // Repository for performing databse operations on Post records
+    // Repository for performing database operations on Post records
     // (needed to verify the post exists and is of type "FOUND")
     private final PostRepository postRepository;
 
@@ -43,9 +43,18 @@ public class ClaimController {
 
     // Handles POST /api/posts/{postId}/claims
     // Creates a new claim against a specific FOUND post
+
+    // @PathVariable: Binds the method parameter postId to the value of the URI template variable
+    // @RequestBody: Binds the method parameter claimRequest to the body of the HTTP request (get the claim data from the request body)
     @PostMapping
+
+    // ResponseEntity represents entire HTTP response including status code, headers, and body.
+    // <?> Java generic wildcard meaning "any type" 
+    // Overall, ResponseEntity<?> can hold a response with any type of body (e.g. Claim, List, String, etc)
     public ResponseEntity<?> createClaim(@PathVariable Long postId, @RequestBody Claim claimRequest) {
-        // Loop up the post by its ID - returns an Optional (may or may not exist)
+
+        // Look up the post by its ID - returns an Optional (may or may not exist)
+        // Can either contain a Post object (<Post>) or be empty (Optional)
         Optional<Post> optionalPost = postRepository.findById(postId);
 
         // If no post was found with that ID - returns a 404 Not Found

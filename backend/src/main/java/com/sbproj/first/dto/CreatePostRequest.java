@@ -18,7 +18,6 @@ public class CreatePostRequest {
     @NotBlank(message = "Post type is required")
     private String postType; 
 
-    private String privateIdentifyingDetails;
     public CreatePostRequest() {}
 
     public CreatePostRequest(String title, String description, String location, String postType, String privateIdentifyingDetails) {
@@ -26,7 +25,6 @@ public class CreatePostRequest {
         this.description = description;
         this.location = location;
         this.postType = postType;
-        this.privateIdentifyingDetails = privateIdentifyingDetails;
     }
 
     public String getTitle() {
@@ -60,13 +58,4 @@ public class CreatePostRequest {
     public void setPostType(String postType) {
         this.postType = postType;
     }
-
-    public String getPrivateIdentifyingDetails() {
-        return privateIdentifyingDetails;
-    }
-
-    public void setPrivateIdentifyingDetails(String privateIdentifyingDetails) {
-        this.privateIdentifyingDetails = privateIdentifyingDetails;
-    }
-
 }

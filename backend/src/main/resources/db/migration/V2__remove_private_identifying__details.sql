@@ -1,0 +1,2 @@
+ALTER TABLE posts
+DROP COLUMN private_identifying_details
