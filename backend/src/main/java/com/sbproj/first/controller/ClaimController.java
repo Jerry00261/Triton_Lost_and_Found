@@ -1,5 +1,6 @@
 package com.sbproj.first.controller;
 
+import com.sbproj.first.dto.CreateClaimRequest;
 import com.sbproj.first.entity.Claim;
 import com.sbproj.first.entity.Post;
 import com.sbproj.first.repository.ClaimRepository;
